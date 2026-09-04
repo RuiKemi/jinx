@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Succubus Dialogue Style Box v4 Custom</title>
+<style>
+    /* ========== 样式保持不变（沿用原版） ========== */
+    .succubus-dialogue-box {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        width: auto;
+        max-width: 100%;
+        padding: 20px 15px 25px 15px;
+        margin: 20px 0;
+        background: linear-gradient(180deg, rgba(42, 10, 46, 0.95) 0%, rgba(20, 5, 20, 0.98) 100%);
+        border-left: 3px solid #ff4081;
+        border-right: 3px solid #ff4081;
+        border-radius: 8px;
+        box-shadow: 0 0 25px rgba(255, 64, 129, 0.3), 
+                    inset 0 0 30px rgba(128, 0, 128, 0.3);
+        backdrop-filter: blur(8px);
+        color: #fff;
+        font-family: sans-serif;
+        box-sizing: border-box;
+    }
+
+    .succubus-dialogue-box::before,
+    .succubus-dialogue-box::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% auto;
+        pointer-events: none;
+        filter: drop-shadow(0 0 5px #ff4081);
+        opacity: 0.8;
+    }
+    
+    .succubus-dialogue-box::before {
+        top: -5px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 50' width='600' height='50'%3E%3Cpath d='M0,50 Q150,50 250,25 Q280,15 300,30 Q320,15 350,25 Q450,50 600,50' fill='none' stroke='%23ff4081' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .succubus-dialogue-box::after {
+        bottom: -10px;
+        transform: rotate(180deg);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 50' width='600' height='50'%3E%3Cpath d='M0,50 Q150,50 250,25 Q280,15 300,30 Q320,15 350,25 Q450,50 600,50' fill='none' stroke='%23ff4081' stroke-width='2'/%3E%3Cpath d='M300,30 C280,10 280,0 300,5 C320,0 320,10 300,30 Z' fill='%233a003a' stroke='%23ff4081' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .avatar-wrapper {
+        flex-shrink: 0;
+        margin-right: 15px;
+        margin-left: 5px;
+        position: relative;
+        z-index: 2;
+        width: 120px;
+        height: 120px;
+    }
+
+    .avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ff80ab;
+        box-shadow: 0 0 15px #ff4081, inset 0 0 10px #3a003a;
+        animation: glow 3s infinite alternate;
+    }
+
+    .content-wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 120px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .content-wrapper::after {
+        content: '♥';
+        position: absolute;
+        top: -15px;
+        right: 0px;
+        font-size: 24px;
+        color: #ff4081;
+        opacity: 0.6;
+        filter: drop-shadow(0 0 5px #ff4081);
+        animation: heartbeat 2s infinite ease-in-out;
+    }
+
+    .char-name {
+        font-size: 16px;
+        color: #ff80ab;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 0 0 8px rgba(255, 128, 171, 0.8);
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .char-name::before {
+        content: "✦";
+        margin-right: 6px;
+        font-size: 12px;
+        color: #ff4081;
+    }
+
+    .dialogue-text {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #f3e5f5;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+        word-break: break-word;
+    }
+
+    .dialogue-text::before {
+        content: "「";
+        color: #ff4081;
+        font-weight: bold;
+        margin-right: 4px;
+    }
+
+    .dialogue-text::after {
+        content: "」";
+        color: #ff4081;
+        font-weight: bold;
+        margin-left: 4px;
+    }
+
+    @media screen and (max-width: 600px) {
+        .succubus-dialogue-box {
+            display: block;
+            padding: 15px 12px 20px 12px;
+        }
+
+        .avatar-wrapper {
+            position: absolute;
+            top: 15px;
+            left: 12px;
+            width: 50px;
+            height: 50px;
+            margin: 0;
+        }
+
+        .avatar {
+            border-width: 2px;
+        }
+
+        .content-wrapper {
+            display: block;
+            min-height: auto;
+            margin-top: 5px;
+        }
+
+        .char-name {
+            margin-left: 60px;
+            height: 50px;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .content-wrapper::after {
+            top: 10px;
+            right: 0;
+            font-size: 18px;
+        }
+
+        .dialogue-text {
+            clear: both;
+            margin-left: 2px;
+            margin-right: 2px;
+            padding-top: 5px;
+            font-size: 15px;
+            line-height: 1.5;
+            border-top: 1px solid rgba(255, 64, 129, 0.2);
+        }
+        
+        .succubus-dialogue-box::after {
+            bottom: -5px;
+            height: 30px;
+            opacity: 0.6;
+        }
+    }
+
+    @keyframes glow {
+        from { box-shadow: 0 0 5px #ff4081; border-color: #ff80ab; }
+        to { box-shadow: 0 0 15px #ff0055, 0 0 20px rgba(255,0,85,0.4); border-color: #ff3060; }
+    }
+
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.2) rotate(5deg); opacity: 0.9; }
+    }
+</style>
+</head>
+<body>
+    <div class="succubus-dialogue-box">
+        <div class="avatar-wrapper">
+            <img id="char-avatar" alt="Avatar" class="avatar">
+        </div>
+        <div class="content-wrapper">
+            <div class="char-name">莉莉丝</div>
+            <p class="dialogue-text">$2</p>
+        </div>
+    </div>
+
+<script>
+    // ================================================================
+    // ① 请修改下面两行以匹配你的仓库和图片文件夹
+    // ================================================================
+    const BASE_PATH = 'https://cdn.jsdelivr.net/gh/你的用户名/myrepo@main/picture/lilith/';
+    const DEFAULT_MOOD = '俏皮';   // 当 mood 无法匹配时的默认情绪
+
+    // ② 情绪 → 图片文件名 映射表（根据你提供的列表）
+    const MOOD_TO_FILE = {
+        "严肃": "01_严肃.png",
+        "俏皮": "02_俏皮.png",
+        "兴奋": "03_兴奋.png",
+        "笑": "04_笑.png",
+        "坏笑": "05_坏笑.png",
+        "嫌弃": "06_嫌弃.png",
+        "庆祝吧": "07_庆祝吧.png",
+        "开心": "08_开心.png",
+        "恐惧": "09_恐惧.png",
+        "惊恐": "10_惊恐.png",
+        "惊讶": "11_惊讶.png",
+        "指导": "12_指导.png",
+        "斥责": "13_斥责.png",
+        "无语": "14_无语.png",
+        "气愤": "15_气愤.png",
+        "渴望": "16_渴望.png",
+        "狂喜": "17_狂喜.png",
+        "痛哭": "18_痛哭.png",
+        "色": "19_色.png",
+        "骄傲": "20_骄傲.png",
+        "鼓励": "21_鼓励.png"
+    };
+
+    // ================================================================
+    // 以下逻辑无需修改（自动根据 mood 取图 + 容错）
+    // ================================================================
+    const mood = '$1';  // 从正则捕获的 mood 属性
+
+    // 获取对应的文件名，若不存在则使用默认情绪的文件名
+    const targetFile = MOOD_TO_FILE[mood] || MOOD_TO_FILE[DEFAULT_MOOD];
+    const targetSrc = BASE_PATH + targetFile;
+
+    // 默认图片（也用于回退）
+    const defaultFile = MOOD_TO_FILE[DEFAULT_MOOD];
+    const defaultSrc = BASE_PATH + defaultFile;
+
+    function parseAndRender() {
+        const avatarEl = document.getElementById('char-avatar');
+        // 预加载目标图片，成功则设置，失败则回退到默认
+        const tempImg = new Image();
+        tempImg.onload = function() {
+            avatarEl.src = targetSrc;
+        };
+        tempImg.onerror = function() {
+            // 如果目标图片加载失败，使用默认图片
+            if (avatarEl.src !== defaultSrc) {
+                avatarEl.src = defaultSrc;
+            }
+        };
+        tempImg.src = targetSrc;
+    }
+
+    parseAndRender();
+</script>
+</body>
+</html>
